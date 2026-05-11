@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cronograma Anual 2026 — Colegio Bicentenario Mary Ward</title>
+<style>
+  :root {
+    --azul:#1a4a8a; --azul-c:#2563eb; --rojo:#dc2626; --rojo-c:#fee2e2;
+    --naranja:#d97706; --naranja-c:#fef3c7; --verde:#16a34a; --verde-c:#dcfce7;
+    --morado:#7c3aed; --morado-c:#ede9fe; --rosa:#be185d; --rosa-c:#fce7f3;
+    --gris:#6b7280; --gris-c:#f3f4f6; --fondo:#f8fafc; --sombra:0 2px 8px rgba(0,0,0,.10);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI',Arial,sans-serif;background:var(--fondo);color:#1e293b}
+
+  header{background:linear-gradient(135deg,#1a4a8a,#2563eb);color:#fff;padding:24px 36px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
+  header h1{font-size:1.6rem;font-weight:700}
+  header p{font-size:.88rem;opacity:.85;margin-top:3px}
+  .meta{text-align:right;font-size:.82rem;opacity:.8}
+  .meta strong{font-size:.95rem;opacity:1;display:block}
+
+  /* MONTH NAV */
+  .month-nav-bar{background:#fff;border-bottom:2px solid #e2e8f0;padding:14px 36px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;position:sticky;top:0;z-index:50;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+  .mnav-arrows{display:flex;align-items:center;gap:10px}
+  .mnav-btn{background:var(--azul);color:#fff;border:none;border-radius:8px;padding:7px 16px;font-size:1.1rem;cursor:pointer;transition:background .15s;font-weight:700}
+  .mnav-btn:hover{background:var(--azul-c)}
+  .mnav-btn:disabled{background:#e2e8f0;color:#9ca3af;cursor:default}
+  .mnav-title{font-size:1.3rem;font-weight:800;color:var(--azul);min-width:180px;text-align:center}
+  .month-pills{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto}
+  .mpill{padding:5px 13px;border-radius:20px;border:1.5px solid #e2e8f0;background:#fff;font-size:.76rem;cursor:pointer;font-weight:600;color:#374151;transition:all .12s}
+  .mpill:hover{border-color:var(--azul-c);color:var(--azul-c)}
+  .mpill.active{background:var(--azul);color:#fff;border-color:var(--azul)}
+  .mpill.mes-actual{border-color:var(--verde);color:var(--verde)}
+  .mpill.mes-actual.active{background:var(--verde);border-color:var(--verde);color:#fff}
+
+  .badge-fuente{display:inline-block;padding:1px 7px;border-radius:10px;font-size:.7rem;font-weight:600;margin-left:4px}
+  .fuente-drive{background:#e0f2fe;color:#0369a1}
+  .fuente-gmail{background:#fce7f3;color:#be185d}
+  .fuente-docx{background:#dcfce7;color:#166534}
+
+  .container{max-width:1380px;margin:0 auto;padding:24px 20px}
+  .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-bottom:24px}
+  .stat-card{background:#fff;border-radius:12px;padding:18px 20px;box-shadow:var(--sombra);border-left:4px solid var(--azul-c)}
+  .stat-card.r{border-left-color:var(--rojo)}.stat-card.g{border-left-color:var(--verde)}.stat-card.o{border-left-color:var(--naranja)}.stat-card.p{border-left-color:var(--morado)}
+  .num{font-size:2rem;font-weight:800;color:var(--azul);line-height:1}
+  .stat-card.r .num{color:var(--rojo)}.stat-card.g .num{color:var(--verde)}.stat-card.o .num{color:var(--naranja)}.stat-card.p .num{color:var(--morado)}
+  .lbl{font-size:.76rem;color:var(--gris);font-weight:600;text-transform:uppercase;letter-spacing:.3px;margin-top:4px}
+  .desc{font-size:.73rem;color:#94a3b8;margin-top:2px}
+
+  .banner{border-radius:10px;padding:14px 18px;margin-bottom:20px;border-left:5px solid}
+  .banner.rojo{background:var(--rojo-c);border-color:var(--rojo)}
+  .banner.azul{background:#eff6ff;border-color:var(--azul-c)}
+  .banner.verde{background:var(--verde-c);border-color:var(--verde)}
+  .banner h3{font-size:.95rem;margin-bottom:8px;display:flex;align-items:center;gap:7px}
+  .banner.rojo h3{color:var(--rojo)}.banner.azul h3{color:var(--azul)}.banner.verde h3{color:var(--verde)}
+  .banner ul{padding-left:18px;font-size:.84rem;line-height:1.8}
+  .banner.rojo ul{color:#7f1d1d}.banner.azul ul{color:#1e3a5f}.banner.verde ul{color:#14532d}
+
+  .section-title{font-size:1.1rem;font-weight:700;color:var(--azul);margin:26px 0 14px;display:flex;align-items:center;gap:9px;border-bottom:2px solid #e2e8f0;padding-bottom:9px}
+
+  .cal-wrap{background:#fff;border-radius:14px;box-shadow:var(--sombra);overflow:hidden;margin-bottom:24px}
+  .cal-hdr{background:var(--azul);color:#fff;padding:16px 22px;text-align:center;font-size:1.15rem;font-weight:700}
+  .cal-grid{display:grid;grid-template-columns:repeat(7,1fr)}
+  .cal-dow{padding:9px 4px;text-align:center;font-size:.68rem;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.4px;border-bottom:1px solid #e2e8f0;background:#f8fafc}
+  .cal-cell{min-height:108px;padding:7px 5px;border:.5px solid #e2e8f0;position:relative;cursor:default;transition:background .12s}
+  .cal-cell:hover{background:#f0f4ff}
+  .cal-cell.empty{background:#fafafa}
+  .cal-cell.hoy{background:#eff6ff}
+  .cal-cell.feriado{background:#f3f4f6}
+  .cal-cell.conflict3{background:#fff5f5}
+  .cal-num{font-size:.83rem;font-weight:700;color:#374151;display:inline-block;width:24px;height:24px;line-height:24px;text-align:center;border-radius:50%;margin-bottom:3px}
+  .cal-cell.hoy .cal-num{background:var(--azul);color:#fff}
+  .cal-cell.feriado .cal-num{background:#9ca3af;color:#fff}
+  .cal-cell.conflict3 .cal-num{background:var(--rojo);color:#fff}
+  .chip{display:block;font-size:.6rem;line-height:1.2;padding:2px 4px;border-radius:3px;margin-bottom:2px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-weight:500}
+  .chip-Evaluacion{background:#dbeafe;color:#1e40af}
+  .chip-SIMCE{background:var(--morado-c);color:#5b21b6}
+  .chip-Entrega{background:var(--rosa-c);color:var(--rosa)}
+  .chip-Deporte{background:var(--verde-c);color:#166534}
+  .chip-Reunion{background:#fde8d1;color:#9a3412}
+  .chip-Formacion{background:#fef9c3;color:#854d0e}
+  .chip-Pastoral{background:#f3e8ff;color:#6b21a8}
+  .chip-Feriado{background:#f3f4f6;color:#4b5563}
+  .chip-Clase{background:var(--verde-c);color:#166534}
+  .chip-Actividad{background:#e0f2fe;color:#0369a1}
+  .chip-Seguridad{background:#fee2e2;color:#991b1b}
+  .cbadge{position:absolute;top:5px;right:5px;background:var(--rojo);color:#fff;border-radius:50%;width:17px;height:17px;font-size:.58rem;font-weight:800;display:flex;align-items:center;justify-content:center}
+  .more{font-size:.6rem;color:#6b7280;padding:1px 4px;background:#f1f5f9;border-radius:3px;margin-top:1px;display:inline-block}
+
+  .filter-bar{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px;align-items:center}
+  .fbtn{padding:4px 13px;border-radius:20px;border:1.5px solid #e2e8f0;background:#fff;font-size:.76rem;cursor:pointer;font-weight:500;transition:all .12s;color:#374151}
+  .fbtn:hover,.fbtn.active{background:var(--azul);color:#fff;border-color:var(--azul)}
+  .fbtn.alerta.active{background:var(--rojo);border-color:var(--rojo)}
+  .tbl-wrap{background:#fff;border-radius:14px;box-shadow:var(--sombra);overflow:hidden;margin-bottom:24px}
+  table{width:100%;border-collapse:collapse}
+  thead th{background:var(--azul);color:#fff;padding:11px 13px;font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.3px;text-align:left}
+  tbody tr{border-bottom:1px solid #f1f5f9;transition:background .1s}
+  tbody tr:hover{background:#f8fafc}
+  tbody tr.cr{background:#fff5f5}
+  tbody tr.fr{background:#f9fafb}
+  tbody td{padding:10px 13px;font-size:.81rem;vertical-align:top}
+  .bt{display:inline-block;padding:2px 8px;border-radius:10px;font-size:.7rem;font-weight:600}
+  .bt-Evaluacion{background:#dbeafe;color:#1e40af}
+  .bt-SIMCE{background:var(--morado-c);color:#5b21b6}
+  .bt-Entrega{background:var(--rosa-c);color:var(--rosa)}
+  .bt-Deporte{background:var(--verde-c);color:#166534}
+  .bt-Reunion{background:#fde8d1;color:#9a3412}
+  .bt-Formacion{background:#fef9c3;color:#854d0e}
+  .bt-Pastoral{background:#f3e8ff;color:#6b21a8}
+  .bt-Feriado{background:#f3f4f6;color:#4b5563}
+  .bt-Clase{background:var(--verde-c);color:#166534}
+  .bt-Actividad{background:#e0f2fe;color:#0369a1}
+  .bt-Seguridad{background:#fee2e2;color:#991b1b}
+  .ci{color:var(--rojo);font-weight:700}
+
+  .sg-card{background:#fff;border-radius:12px;box-shadow:var(--sombra);padding:20px 24px;margin-bottom:24px}
+  .sg-item{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid #f1f5f9;align-items:flex-start}
+  .sg-item:last-child{border:none}
+  .sg-icon{font-size:1.2rem;flex-shrink:0;margin-top:1px}
+  .sg-item h4{font-size:.86rem;font-weight:600;margin-bottom:2px}
+  .sg-item p{font-size:.78rem;color:var(--gris);line-height:1.5}
+
+  footer{background:var(--azul);color:rgba(255,255,255,.75);padding:16px 36px;text-align:center;font-size:.76rem;margin-top:16px}
+  footer strong{color:#fff}
+
+  @media(max-width:768px){
+    .cal-cell{min-height:60px;padding:3px}
+    .chip{display:none}
+    thead th,tbody td{padding:7px 9px;font-size:.75rem}
+    .month-nav-bar{padding:10px 14px}
+    .mnav-title{font-size:1rem;min-width:120px}
+    .month-pills{display:none}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>📅 Cronograma Anual 2026</h1>
+    <p>Colegio Bicentenario Mary Ward · Área de Innovación Educativa</p>
+  </div>
+  <div class="meta">
+    <strong>Roberto Gálvez</strong>
+    Encargado de Innovación Educativa<br>
+    Fuentes: Drive + Gmail + Locales · 09/05/2026
+  </div>
+</header>
+
+<!-- NAVEGACIÓN DE MES -->
+<div class="month-nav-bar">
+  <div class="mnav-arrows">
+    <button class="mnav-btn" id="btnPrev" onclick="changeMonth(-1)">&#8592;</button>
+    <div class="mnav-title" id="mnTitle">Mayo 2026</div>
+    <button class="mnav-btn" id="btnNext" onclick="changeMonth(1)">&#8594;</button>
+  </div>
+  <div class="month-pills">
+    <button class="mpill" data-m="4" onclick="goMonth(4)">Abr</button>
+    <button class="mpill mes-actual active" data-m="5" onclick="goMonth(5)">May ●</button>
+    <button class="mpill" data-m="6" onclick="goMonth(6)">Jun</button>
+    <button class="mpill" data-m="7" onclick="goMonth(7)">Jul</button>
+    <button class="mpill" data-m="8" onclick="goMonth(8)">Ago</button>
+    <button class="mpill" data-m="9" onclick="goMonth(9)">Sep</button>
+    <button class="mpill" data-m="10" onclick="goMonth(10)">Oct</button>
+    <button class="mpill" data-m="11" onclick="goMonth(11)">Nov</button>
+    <button class="mpill" data-m="12" onclick="goMonth(12)">Dic</button>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- FUENTES CONECTADAS -->
+<div class="banner azul">
+  <h3>🔗 Fuentes de datos conectadas automáticamente</h3>
+  <ul>
+    <li><span class="badge-fuente fuente-drive">Google Drive</span> <strong>CRONOGRAMA MES DE MAYO.docx</strong> + <strong>CRONOGRAMA ANUAL DE ACTIVIDADES CBMW.docx</strong> (robertogalvez@cbmw.cl / mariajoselatorre@liceomariaward.com)</li>
+    <li><span class="badge-fuente fuente-gmail">Gmail</span> Correos institucionales procesados (JDE Futsal, JDE Balonmano, Mujeres + Matemática, y otros)</li>
+    <li><span class="badge-fuente fuente-docx">Archivos locales</span> Calendario MIPP Un Mundo Feliz 3°HC · Planes SIMCE 2026</li>
+  </ul>
+</div>
+
+<!-- STATS DINÁMICOS -->
+<div class="stats-grid" id="statsGrid"></div>
+
+<!-- ALERTAS DINÁMICAS -->
+<div id="alertaBanner"></div>
+
+<!-- PRÓXIMOS 7 DÍAS (solo mes actual) -->
+<div id="proximosWrap"></div>
+
+<!-- CALENDARIO DINÁMICO -->
+<div class="section-title" id="calTitle">📆 Calendario</div>
+<div class="cal-wrap">
+  <div class="cal-hdr" id="calHdr">📅 Mayo 2026 — Colegio Bicentenario Mary Ward</div>
+  <div class="cal-grid" id="calGrid">
+    <div class="cal-dow">Lun</div><div class="cal-dow">Mar</div><div class="cal-dow">Mié</div>
+    <div class="cal-dow">Jue</div><div class="cal-dow">Vie</div><div class="cal-dow">Sáb</div><div class="cal-dow">Dom</div>
+  </div>
+</div>
+
+<!-- TABLA DINÁMICA -->
+<div class="section-title">📋 Lista de eventos del mes</div>
+<div class="filter-bar" id="filterBar">
+  <span style="font-size:.78rem;color:#6b7280;font-weight:600;margin-right:4px">Filtrar:</span>
+  <button class="fbtn active" data-f="all" onclick="filterTable('all',this)">Todos</button>
+  <button class="fbtn" data-f="Evaluacion" onclick="filterTable('Evaluacion',this)">Evaluaciones</button>
+  <button class="fbtn" data-f="SIMCE" onclick="filterTable('SIMCE',this)">SIMCE</button>
+  <button class="fbtn" data-f="Entrega" onclick="filterTable('Entrega',this)">Entregas</button>
+  <button class="fbtn" data-f="Deporte" onclick="filterTable('Deporte',this)">Deportes</button>
+  <button class="fbtn" data-f="Clase" onclick="filterTable('Clase',this)">Clases MIPP</button>
+  <button class="fbtn" data-f="Reunion" onclick="filterTable('Reunion',this)">Reuniones</button>
+  <button class="fbtn" data-f="Pastoral" onclick="filterTable('Pastoral',this)">Pastoral</button>
+  <button class="fbtn alerta" data-f="conflicto" onclick="filterTable('conflicto',this)">⚠ Solo conflictos</button>
+  <button class="fbtn" style="margin-left:auto;background:#16a34a;color:#fff;border-color:#16a34a" onclick="exportJSON()">⬇ JSON</button>
+</div>
+<div class="tbl-wrap">
+  <table><thead><tr>
+    <th style="width:95px">Fecha</th>
+    <th>Actividad / Evento</th>
+    <th style="width:95px">Tipo</th>
+    <th style="width:150px">Responsable</th>
+    <th style="width:90px">Hora</th>
+    <th style="width:110px">Nivel/Curso</th>
+    <th style="width:80px">Fuente</th>
+  </tr></thead>
+  <tbody id="eventsBody"></tbody></table>
+</div>
+
+<!-- SUGERENCIAS (solo mayo) -->
+<div id="sugerenciasWrap"></div>
+
+</div><!-- /container -->
+
+<footer>
+  <strong>Colegio Bicentenario Mary Ward</strong> · Área de Innovación Educativa · Roberto Gálvez<br>
+  Fuentes: Google Drive (M.J. Latorre + R. Gálvez) + Gmail + Archivos locales · Actualización automática: cada lunes 7:00 AM · v3.0 Anual — 09/05/2026
+</footer>
+
+<script>
+// ===== DATOS ANUALES 2026 =====
+const MDATA = {
+
+// ── ABRIL ──────────────────────────────────────────────
+4: [
+  {d:1,  tipo:"Actividad",  act:"Inicio Talleres Extraescolares",                                   resp:"Coord. Extraescolar",            h:"—",             niv:"Comunidad educativa", src:"drive"},
+  {d:1,  tipo:"Actividad",  act:"Vacuna influenza pk–5° básico",                                    resp:"Dirección / Salud",              h:"—",             niv:"pk–5° básico",        src:"drive"},
+  {d:2,  tipo:"Actividad",  act:"Vacuna influenza / Día concienciación autismo",                    resp:"—",                             h:"—",             niv:"pk–5° básico",        src:"drive"},
+  {d:4,  tipo:"Actividad",  act:"Vacuna influenza / Día de la actividad física",                    resp:"—",                             h:"—",             niv:"pk–5° básico",        src:"drive"},
+  {d:7,  tipo:"Actividad",  act:"Semana de la Matemática (7–11 abril)",                             resp:"Depto. Matemática",              h:"Toda la semana",niv:"Comunidad educativa", src:"drive"},
+  {d:7,  tipo:"Actividad",  act:"Elección Centro Estudiantil 2025–2026",                            resp:"Orientación / Pastoral",         h:"—",             niv:"Estudiantes",         src:"drive"},
+  {d:8,  tipo:"Reunion",    act:"Consejo Escolar: Sesión 1",                                        resp:"Equipo Directivo",               h:"—",             niv:"Consejo escolar",     src:"drive"},
+  {d:12, tipo:"Actividad",  act:"Evento Comunal Cocina Chilena: Clase en vivo en plaza de San Ignacio",resp:"Depto. Técnico Profesional",  h:"—",             niv:"Comunidad San Ignacio",src:"drive"},
+  {d:14, tipo:"Pastoral",   act:"Bendición de Ramos / Inicio equipos de aula pk–IV° medio",        resp:"Pastoral y Formación",           h:"—",             niv:"Comunidad educativa", src:"drive"},
+  {d:16, tipo:"Reunion",    act:"Consejo de profesores: Pastoral y Formación",                      resp:"Pastoral y Formación",           h:"—",             niv:"Docentes",            src:"drive"},
+  {d:17, tipo:"Pastoral",   act:"Celebración Jueves Santo",                                         resp:"Pastoral y Formación",           h:"—",             niv:"Comunidad educativa", src:"drive"},
+  {d:18, tipo:"Feriado",    act:"Viernes Santo",                                                    resp:"—",                             h:"Todo el día",   niv:"Comunidad educativa", src:"nacional"},
+  {d:21, tipo:"Pastoral",   act:"Celebración Pascua de Resurrección",                               resp:"Pastoral y Formación",           h:"—",             niv:"Comunidad educativa", src:"drive"},
+  {d:22, tipo:"Actividad",  act:"Día de la Tierra",                                                 resp:"—",                             h:"—",             niv:"Comunidad educativa", src:"drive"},
+  {d:23, tipo:"Actividad",  act:"Celebración Día de la Cocina Chilena / Día Oficial del Libro",    resp:"Depto. Técnico Profesional",     h:"—",             niv:"Comunidad educativa", src:"drive"},
+  {d:25, tipo:"Actividad",  act:"Conmemoración Día del Libro",                                      resp:"Depto. Humanidades",             h:"—",             niv:"Comunidad educativa", src:"drive"},
+  {d:29, tipo:"Actividad",  act:"Día de la Convivencia Educativa",                                  resp:"Convivencia Educativa",          h:"—",             niv:"Comunidad educativa", src:"drive"},
+],
+
+// ── MAYO ──────────────────────────────────────────────
+5: [
+  {d:1,  tipo:"Feriado",    act:"Feriado — Día Internacional del Trabajo",                          resp:"—",                             h:"Todo el día",   niv:"Comunidad educativa", src:"nacional"},
+  {d:2,  tipo:"Feriado",    act:"Interferiado",                                                      resp:"—",                             h:"Todo el día",   niv:"Comunidad educativa", src:"drive"},
+  {d:21, tipo:"Feriado",    act:"⚠ FERIADO — Glorias Navales · Clase MIPP suspendida",               resp:"—",                             h:"Todo el día",   niv:"Comunidad educativa", src:"nacional"},
+  {d:4,  tipo:"Reunion",    act:"Encuentro Encargados de Convivencia",                               resp:"Convivencia Educativa",          h:"11:30–13:30",   niv:"Docentes",            src:"drive"},
+  {d:4,  tipo:"Reunion",    act:"Reunión por área — Orientación (Red CJ)",                          resp:"Convivencia Educativa",          h:"12:00",         niv:"Orientación",         src:"drive"},
+  {d:4,  tipo:"Actividad",  act:"Equipo de aula 3°A (Prof. Millaray Manosalva)",                    resp:"Coord. Ciclo Básico",            h:"10:00",         niv:"3°A",                 src:"drive"},
+  {d:4,  tipo:"Reunion",    act:"Encuentro Red CJ con Obispo",                                      resp:"Sostenedora y Directora",        h:"10:00",         niv:"Equipo directivo",    src:"drive"},
+  {d:5,  tipo:"Actividad",  act:"Taller espacios amigables: prevención del bullying (5tos básicos)",resp:"Convivencia Educativa",           h:"09:50",         niv:"5° Básico",           src:"drive"},
+  {d:5,  tipo:"Actividad",  act:"Presentación PISE y Protocolos (asistentes de educación y auxiliares)",resp:"Prevencionista de Riesgos",  h:"10:00",         niv:"Asistentes/Auxiliares",src:"drive"},
+  {d:5,  tipo:"Actividad",  act:"Charla Convivencia digital: buen uso de redes sociales",           resp:"Coordinadora Ciclo Medio",       h:"11:40",         niv:"8°, I° y II° Medios", src:"drive"},
+  {d:5,  tipo:"Reunion",    act:"Encuentro educación Amerindia — Coord. Pedagógica, 2° Ciclo y TP", resp:"G. Acuña, M.J. Latorre, P. Saldías",h:"10:00–12:30",niv:"Equipo pedagógico",  src:"drive"},
+  {d:5,  tipo:"Actividad",  act:"Taller espacios amigables: alimentación saludable (6tos básicos)",  resp:"Convivencia Educativa",         h:"14:00",         niv:"6° Básico",           src:"drive"},
+  {d:5,  tipo:"Seguridad",  act:"Capacitación seguridad a estudiantes monitores (I° a IV° medio)",  resp:"Prevencionista de Riesgo",       h:"14:30",         niv:"I° a IV° Medio",      src:"drive"},
+  {d:6,  tipo:"Reunion",    act:"Encuentro encargados de departamentos y equipo pedagógico — Casa encuentro San José",resp:"Coord. Pedagógica",h:"15:00",   niv:"Jefes de depto.",     src:"drive"},
+  {d:6,  tipo:"Pastoral",   act:"Encuentro con Cristo 4°A",                                         resp:"Pastoral y Formación",           h:"08:00",         niv:"4°A",                 src:"drive"},
+  {d:6,  tipo:"Reunion",    act:"Encuentro articulación pedagógica III°HC y IV°HC — CRA",           resp:"Equipo Directivo",               h:"14:00",         niv:"III° y IV° HC",       src:"drive"},
+  {d:6,  tipo:"Actividad",  act:"Jornada de reflexión y análisis del RIE",                          resp:"Convivencia Educativa",          h:"15:15–17:45",   niv:"Docentes",            src:"drive"},
+  {d:6,  tipo:"Clase",      act:"MIPP Un Mundo Feliz — Cl.7: Lectura autónoma caps. 8–9 (John el Salvaje)",resp:"Roberto Gálvez",        h:"Tarde (45 min)",niv:"3°HC",                src:"docx"},
+  {d:6,  tipo:"Deporte",    act:"Final comunal Futsal Sub 14 — Damas y Varones (JDE/IND)",          resp:"Javier Pinilla",                 h:"10:00–13:00",   niv:"7°A,7°B,8°A,8°B,1°A,1°B,6°A",src:"gmail"},
+  {d:7,  tipo:"Deporte",    act:"Mujeres + Matemática — INACAP Chillán (delegación de estudiantes)",resp:"Cristóbal Parra",               h:"09:30–13:00",   niv:"I°A, II°B, III°HC, IV°HC",src:"gmail"},
+  {d:7,  tipo:"Deporte",    act:"Final comunal Balonmano damas Sub 14 (JDE/IND)",                   resp:"Javier Pinilla",                 h:"10:30–11:30",   niv:"Damas Sub 14 Media",  src:"gmail"},
+  {d:7,  tipo:"Reunion",    act:"Reunión Red Liceos Bicentenarios — Colegio Padre Hurtado Chillán", resp:"Directora y Coord. Pedagógica",  h:"11:00",         niv:"Equipo directivo",    src:"drive"},
+  {d:7,  tipo:"Pastoral",   act:"Investidura embajadores de convivencia educativa — Salón Mary Ward",resp:"Convivencia Educativa",         h:"14:00",         niv:"Comunidad educativa", src:"drive"},
+  {d:7,  tipo:"Reunion",    act:"Reunión Trabajo por Departamento",                                  resp:"Encargados de Departamento",    h:"16:30",         niv:"Docentes",            src:"drive"},
+  {d:7,  tipo:"Formacion",  act:"Jornada Visión Compartida — día sin clases de los estudiantes",    resp:"Equipo Directivo",               h:"Todo el día",   niv:"Comunidad educativa", src:"drive"},
+  {d:8,  tipo:"Actividad",  act:"Jornada de celebración Día del Estudiante",                        resp:"Encargado de Eventos Masivos",   h:"08:00",         niv:"Estudiantes",         src:"drive"},
+  {d:8,  tipo:"Clase",      act:"MIPP Un Mundo Feliz — Cl.8–9: Investigación guiada + mapa argumental [CP4: caps. 10–12]",resp:"Roberto Gálvez",h:"Mañana (90 min)",niv:"3°HC",      src:"docx"},
+  {d:9,  tipo:"Reunion",    act:"Asamblea Diocesana — Colegio Seminario Padre Alberto Hurtado",     resp:"Equipo Directivo / Pastoral",    h:"08:30–14:00",   niv:"Equipo directivo",    src:"drive"},
+  {d:11, tipo:"Actividad",  act:"Semana de la Educación Artística (11–15 mayo)",                    resp:"Departamento Integral",          h:"Toda la semana",niv:"Comunidad educativa", src:"drive"},
+  {d:11, tipo:"Reunion",    act:"Área Artes/Música/Tecnología: Bases Festival Mary Ward ISMA",      resp:"Coord. Pedagógica / Prof. Suazo",h:"15:00",         niv:"Docentes",            src:"drive"},
+  {d:11, tipo:"Actividad",  act:"Encuentro con apoderados Gira Líderes Integrales (Santiago)",      resp:"Equipo Directivo / Pastoral",    h:"16:30",         niv:"Apoderados",          src:"drive"},
+  {d:12, tipo:"Actividad",  act:"III Encuentro de Ciencias 8° y I° Medio en Santiago (12–15 mayo)",resp:"Prof. Diego Vidal",              h:"Todo el día",   niv:"8° y I° Medio",       src:"drive"},
+  {d:12, tipo:"Reunion",    act:"Reunión Directorio Centro General de Padres y Delegados de cursos",resp:"Asesora CCPP",                   h:"09:00",         niv:"Apoderados",          src:"drive"},
+  {d:12, tipo:"Actividad",  act:"Encuentro con familias nuevas del colegio",                        resp:"Equipo Directivo",               h:"16:30",         niv:"Apoderados nuevos",   src:"drive"},
+  {d:12, tipo:"Actividad",  act:"Equipo de aula IV°HC (2da parte) — Prof. Roberto Gálvez",         resp:"Roberto Gálvez",                 h:"09:55",         niv:"IV°HC",               src:"drive"},
+  {d:12, tipo:"Reunion",    act:"Jornada Equipos Directivos Red CJ (día 1/3)",                      resp:"Equipo Directivo",               h:"Todo el día",   niv:"Directivos",          src:"drive"},
+  {d:13, tipo:"Pastoral",   act:"Liturgia Encuentro con Cristo 4°A",                                resp:"Pastoral y Formación",           h:"08:30",         niv:"4°A",                 src:"drive"},
+  {d:13, tipo:"Evaluacion", act:"★ MIPP Un Mundo Feliz — Cl.10: CP5 Libro completo · Inicio escritura tesis del ensayo",resp:"Roberto Gálvez",h:"Tarde (45 min)",niv:"3°HC",         src:"docx"},
+  {d:13, tipo:"Reunion",    act:"Encuentro Centros de Alumnos REECA — Casa Tabor (con Obispo)",     resp:"Pastoral / Asesor CA",           h:"10:00",         niv:"Centro de Alumnos",   src:"drive"},
+  {d:13, tipo:"Reunion",    act:"Consejo de Profesores: Presentación PISE y Simulacros",            resp:"Coord. PIE",                     h:"16:30",         niv:"Docentes",            src:"drive"},
+  {d:13, tipo:"Reunion",    act:"Jornada Equipos Directivos Red CJ (día 2/3)",                      resp:"Equipo Directivo",               h:"Todo el día",   niv:"Directivos",          src:"drive"},
+  {d:14, tipo:"Reunion",    act:"Trabajo en Reunión de Departamento",                               resp:"Encargados de Departamento",     h:"16:30",         niv:"Docentes",            src:"drive"},
+  {d:14, tipo:"Formacion",  act:"Presentación programa Encuentro de Líderes INSAMACH",             resp:"Pastoral y Formación",           h:"15:00",         niv:"Docentes / Líderes",  src:"drive"},
+  {d:14, tipo:"Actividad",  act:"Caminata de anticipación zonas de seguridad — Ciclo Inicial (14–20 mayo)",resp:"Coord. Ciclo Inicial",  h:"Múltiples días",niv:"Ciclo Inicial",        src:"drive"},
+  {d:14, tipo:"Reunion",    act:"Jornada Equipos Directivos Red CJ (día 3/3)",                      resp:"Equipo Directivo",               h:"Todo el día",   niv:"Directivos",          src:"drive"},
+  {d:15, tipo:"Pastoral",   act:"Eucaristía Encuentro con Cristo IV°TP",                            resp:"Pastoral y Formación",           h:"08:30",         niv:"IV°TP",               src:"drive"},
+  {d:15, tipo:"Evaluacion", act:"MIPP Un Mundo Feliz — Cl.11–12: Escritura colaborativa Borrador 1 del ensayo",resp:"Roberto Gálvez",  h:"Mañana (90 min)",niv:"3°HC",                src:"docx"},
+  {d:15, tipo:"SIMCE",      act:"Dominio lector diagnóstico — II° Medio (2ª quincena)",            resp:"Coord. Ciclo / Educ. diferencial",h:"Horario asignatura",niv:"II° Medio",       src:"docx"},
+  {d:17, tipo:"Pastoral",   act:"Misa Familiar 2°A – 2°B – 8°A – 8°B",                            resp:"Pastoral y Formación / Prof. Jefes",h:"10:00",       niv:"2° y 8° cursos",      src:"drive"},
+  {d:18, tipo:"Reunion",    act:"Área Humanidades: Bases Encuentro Humanista INSAMACH",             resp:"Coord. Pedagógica / J. Riquelme",h:"15:00",         niv:"Docentes Humanidades",src:"drive"},
+  {d:18, tipo:"Actividad",  act:"Conversatorio con ex estudiantes T.P y H.C para II° Medio (18–19 mayo)",resp:"Coord. Media y Coord. TP",h:"10:00",          niv:"II° Medio",           src:"drive"},
+  {d:19, tipo:"Actividad",  act:"Visita al colegio — Monseñor Andrés Ferrada Moreira (Obispo)",    resp:"Equipo Directivo",               h:"11:30",         niv:"Comunidad educativa", src:"drive"},
+  {d:19, tipo:"Reunion",    act:"Encuentro Red Amerindia — Representante estudiantes y CEISMA",     resp:"Pastoral y Formación / CEISMA",  h:"12:00–13:00",   niv:"Pastoral",            src:"drive"},
+  {d:20, tipo:"Pastoral",   act:"Encuentro con Cristo III°TP",                                      resp:"Pastoral y Formación",           h:"08:00",         niv:"III°TP",              src:"drive"},
+  {d:20, tipo:"Pastoral",   act:"Celebración Pentecostés con colaboradores, apoderados y estudiantes",resp:"Pastoral y Formación",        h:"16:30",         niv:"Comunidad educativa", src:"drive"},
+  {d:20, tipo:"Evaluacion", act:"MIPP Un Mundo Feliz — Cl.13: Revisión entre pares del Borrador 1",resp:"Roberto Gálvez",                h:"Tarde (45 min)",niv:"3°HC",                src:"docx"},
+  {d:23, tipo:"Actividad",  act:"Día del Patrimonio (23–24 mayo)",                                  resp:"Departamento Humanidades",       h:"Ambos días",    niv:"Comunidad educativa", src:"drive"},
+  {d:23, tipo:"Pastoral",   act:"Pascua Hna. Armella Hutzler",                                      resp:"Pastoral y Formación",           h:"08:00",         niv:"Comunidad educativa", src:"drive"},
+  {d:25, tipo:"Pastoral",   act:"Oración especial — Conmemoración Pascua Hna. Armella Hutzler",    resp:"Pastoral y Formación",           h:"08:00",         niv:"Comunidad educativa", src:"drive"},
+  {d:25, tipo:"Reunion",    act:"Reunión de apoderados — Ciclo Inicial",                            resp:"Profesor/a Jefe",                h:"16:30",         niv:"Apoderados CI",       src:"drive"},
+  {d:25, tipo:"Seguridad",  act:"Semana de la Seguridad Escolar (25–29 mayo)",                      resp:"Prevencionista / Comité Seguridad",h:"Toda la semana",niv:"Comunidad educativa",src:"drive"},
+  {d:25, tipo:"Actividad",  act:"Gira Líderes Integrales — Santiago (25–29 mayo)",                  resp:"Equipo Directivo / Pastoral",    h:"Toda la semana",niv:"Líderes estudiantiles",src:"drive"},
+  {d:26, tipo:"Seguridad",  act:"Simulacro SISMO",                                                  resp:"Prevencionista de Riesgo",       h:"10:00",         niv:"Comunidad educativa", src:"drive"},
+  {d:26, tipo:"Reunion",    act:"Reunión de apoderados — Ciclo Enseñanza Básica",                  resp:"Profesor/a Jefe",                h:"16:30",         niv:"Apoderados básica",   src:"drive"},
+  {d:26, tipo:"Actividad",  act:"Charla Universidad del Bío-Bío Chillán para IV° medios H.C y T.P",resp:"Coord. área TP / Prof. asignatura",h:"14:00",       niv:"IV° Medios",          src:"drive"},
+  {d:27, tipo:"Pastoral",   act:"Encuentro con Cristo 4°B",                                         resp:"Pastoral y Formación",           h:"08:00",         niv:"4°B",                 src:"drive"},
+  {d:27, tipo:"Evaluacion", act:"MIPP Un Mundo Feliz — Cl.14: Revisión individual ensayo (coherencia, argumentación, citas)",resp:"Roberto Gálvez",h:"Tarde (45 min)",niv:"3°HC",   src:"docx"},
+  {d:27, tipo:"Reunion",    act:"Reunión de apoderados — Ciclo Enseñanza Media",                    resp:"Profesor/a Jefe",                h:"16:30",         niv:"Apoderados media",    src:"drive"},
+  {d:27, tipo:"Actividad",  act:"Congreso de Geografía, Territorio y Desafíos Socioambientales — 7° y 8° básico (27–28)",resp:"Coord. Pedagógica / J. Riquelme",h:"08:00",niv:"7° y 8° Básico",src:"drive"},
+  {d:28, tipo:"Reunion",    act:"Visita Red CJ",                                                    resp:"Equipo Directivo",               h:"08:00",         niv:"Equipo directivo",    src:"drive"},
+  {d:28, tipo:"Reunion",    act:"Trabajo por Departamentos",                                        resp:"Encargados de Departamento",     h:"16:30",         niv:"Docentes",            src:"drive"},
+  {d:28, tipo:"SIMCE",      act:"Ensayo SIMCE Lectura — II° Medio (última semana · Umáximo)",      resp:"Coord. Ciclo / Prof. Asignatura",h:"Horario asignatura",niv:"II° Medio",        src:"docx"},
+  {d:28, tipo:"SIMCE",      act:"Ensayo SIMCE Matemática — II° Medio (última semana · Umáximo)",   resp:"Coord. Ciclo / Prof. Asignatura",h:"Horario asignatura",niv:"II° Medio",        src:"docx"},
+  {d:29, tipo:"Pastoral",   act:"Eucaristía Encuentro con Cristo III°TP",                           resp:"Pastoral y Formación",           h:"08:30",         niv:"III°TP",              src:"drive"},
+  {d:29, tipo:"Entrega",    act:"★ ENTREGA — Ensayo final Un Mundo Feliz · Versión definitiva",    resp:"Roberto Gálvez",                 h:"Mañana (90 min)",niv:"3°HC",               src:"docx"},
+  {d:29, tipo:"SIMCE",      act:"Ensayo SIMCE Lectura — 6° Básico (última semana · Umáximo)",      resp:"Coord. Ciclo / Prof. Asignatura",h:"Horario asignatura",niv:"6° Básico",        src:"docx"},
+  {d:29, tipo:"SIMCE",      act:"Ensayo SIMCE Matemática — 6° Básico (última semana · Umáximo)",   resp:"Coord. Ciclo / Prof. Asignatura",h:"Horario asignatura",niv:"6° Básico",        src:"docx"},
+  {d:29, tipo:"Reunion",    act:"Encuentro de Pastoral — Colaboradores del Aseo",                  resp:"Pastoral y Formación",           h:"14:00",         niv:"Colaboradores",       src:"drive"},
+  {d:30, tipo:"Pastoral",   act:"Encuentro de Confirmación (horario por confirmar)",                resp:"Pastoral y Formación Diocesana", h:"Por confirmar", niv:"Jóvenes confirmación",src:"drive"},
+],
+
+// ── JUNIO ──────────────────────────────────────────────
+6: [
+  {d:5,  tipo:"Pastoral",   act:"Celebración Pentecostés colaboradores",                            resp:"Pastoral y Formación",           h:"16:00–17:45",   niv:"Colaboradores",       src:"drive"},
+  {d:9,  tipo:"Actividad",  act:"Encuentros Líderes Integrales",                                    resp:"Equipo Directivo / Pastoral",    h:"—",             niv:"Líderes estudiantiles",src:"drive"},
+  {d:9,  tipo:"Actividad",  act:"Seminario de inclusión educativa: abrazando la diversidad — colegio anfitrión San Ignacio (9–10 jun)",resp:"Coord. PIE",h:"—",niv:"Docentes/Directivos",src:"drive"},
+  {d:9,  tipo:"Actividad",  act:"Gira Líderes Íntegrales a Santiago — reconocimiento I°–IV° medio (9–13 junio)",resp:"Equipo Directivo/Pastoral",h:"Toda la semana",niv:"Líderes I°–IV° med.",src:"drive"},
+  {d:11, tipo:"Deporte",    act:"Copa Mary Ward — ciudad de Santiago (11–14 junio)",                resp:"Educación Física",               h:"Varios días",   niv:"Delegación deportiva",src:"drive"},
+  {d:17, tipo:"Actividad",  act:"Último día de clases",                                             resp:"Equipo Directivo",               h:"—",             niv:"Comunidad educativa", src:"drive"},
+  {d:18, tipo:"Formacion",  act:"Jornada de planificación, evaluación y análisis curricular (18–19 junio)",resp:"Equipo Directivo/Pedagógico",h:"Todo el día",niv:"Docentes",          src:"drive"},
+  {d:23, tipo:"Feriado",    act:"Inicio receso vacaciones de invierno",                             resp:"—",                             h:"Todo el día",   niv:"Comunidad educativa", src:"drive"},
+],
+
+// ── JULIO ──────────────────────────────────────────────
+7: [
+  {d:1,  tipo:"Actividad",  act:"Término receso vacaciones de invierno",                            resp:"—",                             h:"—",             niv:"Comunidad educativa", src:"drive"},
+  {d:7,  tipo:"Actividad",  act:"Inicio II° Semestre",                                              resp:"Equipo Directivo",               h:"—",             niv:"Comunidad educativa", src:"drive"},
+  {d:10, tipo:"Actividad",  act:"Mateada Solidaria",                                                resp:"Pastoral / Convivencia",         h:"—",             niv:"Comunidad educativa", src:"drive"},
+  {d:23, tipo:"Pastoral",   act:"Celebración We Tripantu",                                          resp:"Pastoral y Formación",           h:"—",             niv:"Comunidad educativa", src:"drive"},
+],
+
+// ── AGOSTO ──────────────────────────────────────────────
+8: [
+  {d:4,  tipo:"Actividad",  act:"Encuentro de Ciencias en Antofagasta (4–8 agosto)",                resp:"Prof. Diego Vidal",              h:"Toda la semana",niv:"Delegación científica",src:"drive"},
+  {d:8,  tipo:"Actividad",  act:"Celebración Día de la Niñez — pk a 6° básico",                    resp:"Ed. Parvularia y 1er ciclo",     h:"—",             niv:"pk–6° básico",        src:"drive"},
+  {d:11, tipo:"Actividad",  act:"Semana de Mary Ward (11–14 agosto)",                               resp:"Pastoral y Formación",           h:"Toda la semana",niv:"Comunidad educativa", src:"drive"},
+  {d:13, tipo:"Reunion",    act:"Consejo de Pastoral: Celebración Día de las Religiosas",           resp:"Pastoral y Formación",           h:"—",             niv:"Colaboradores",       src:"drive"},
+  {d:18, tipo:"Actividad",  act:"Día Nacional de la Solidaridad / Inicio seguimiento equipos de aula pk–IV° medio",resp:"Equipo Directivo",h:"—",            niv:"Comunidad educativa", src:"drive"},
+  {d:21, tipo:"Actividad",  act:"III Versión Feria Vocacional",                                     resp:"Equipo Directivo / TP",          h:"—",             niv:"Comunidad educativa", src:"drive"},
+  {d:25, tipo:"Actividad",  act:"Encuentro de Líderes (anfitrión Santiago) / Semana de Inglés (25–29 agosto)",resp:"Equipo Directivo/Pastoral",h:"Toda la semana",niv:"Líderes estudiantiles",src:"drive"},
+  {d:26, tipo:"Actividad",  act:"Día de la Educación Técnico Profesional",                          resp:"Coord. TP",                      h:"—",             niv:"Comunidad educativa", src:"drive"},
+  {d:28, tipo:"Actividad",  act:"Jornada de reconocimiento Líderes Integrales 4°–8° básico",       resp:"Equipo Directivo / Pastoral",    h:"—",             niv:"4°–8° básico",        src:"drive"},
+],
+
+// ── SEPTIEMBRE ──────────────────────────────────────────
+9: [
+  {d:3,  tipo:"Pastoral",   act:"Misa inicio Aniversario N° 67 del colegio",                       resp:"Ed. Parvularia y 1er ciclo",     h:"—",             niv:"Comunidad educativa", src:"drive"},
+  {d:4,  tipo:"Actividad",  act:"Actividades Aniversario N° 67",                                    resp:"Equipo Directivo",               h:"—",             niv:"Comunidad educativa", src:"drive"},
+  {d:5,  tipo:"Actividad",  act:"Acto de clausura Aniversario N° 67",                              resp:"Equipo Directivo",               h:"—",             niv:"Comunidad educativa", src:"drive"},
+  {d:10, tipo:"Actividad",  act:"Día Mundial de Prevención del Suicidio",                          resp:"Convivencia Educativa / Psicología",h:"—",           niv:"Comunidad educativa", src:"drive"},
+  {d:12, tipo:"Actividad",  act:"Día de la Chilenidad",                                             resp:"Depto. Humanidades",             h:"—",             niv:"Comunidad educativa", src:"drive"},
+  {d:15, tipo:"Feriado",    act:"Inicio receso Fiestas Patrias (15–20 septiembre)",                resp:"—",                             h:"Toda la semana",niv:"Comunidad educativa", src:"nacional"},
+  {d:18, tipo:"Feriado",    act:"Feriado — Día de la Independencia Nacional",                      resp:"—",                             h:"Todo el día",   niv:"Comunidad educativa", src:"nacional"},
+  {d:19, tipo:"Feriado",    act:"Feriado — Glorias del Ejército de Chile",                         resp:"—",                             h:"Todo el día",   niv:"Comunidad educativa", src:"nacional"},
+  {d:25, tipo:"Actividad",  act:"Jornada de reconocimiento Líderes Integrales pk–3° básico",       resp:"Equipo Directivo / Pastoral",    h:"—",             niv:"pk–3° básico",        src:"drive"},
+],
+
+// ── OCTUBRE ──────────────────────────────────────────────
+10: [
+  {d:1,  tipo:"Actividad",  act:"Acto celebración Día del Asistente de la Educación",              resp:"Equipo Directivo",               h:"—",             niv:"Asistentes de educación",src:"drive"},
+  {d:2,  tipo:"Actividad",  act:"Día Nacional del Medio Ambiente",                                  resp:"Depto. Ciencias / Convivencia",  h:"—",             niv:"Comunidad educativa", src:"drive"},
+  {d:8,  tipo:"Actividad",  act:"Encuentro Humanista en Chillán (8–10 octubre)",                   resp:"Depto. Humanidades",             h:"Varios días",   niv:"Delegación humanidades",src:"drive"},
+  {d:10, tipo:"Actividad",  act:"Día Mundial de la Salud Mental",                                   resp:"Convivencia Educativa / Psicología",h:"—",           niv:"Comunidad educativa", src:"drive"},
+  {d:15, tipo:"Actividad",  act:"Acto celebración Día del/la Profesor/a",                          resp:"Equipo Directivo",               h:"—",             niv:"Docentes",            src:"drive"},
+  {d:17, tipo:"Actividad",  act:"Desfile Comunal",                                                  resp:"Coord. Extraescolar",            h:"—",             niv:"Comunidad educativa", src:"drive"},
+  {d:23, tipo:"Actividad",  act:"Día de la Biblioteca Escolar",                                     resp:"Encargado CRA",                  h:"—",             niv:"Comunidad educativa", src:"drive"},
+],
+
+// ── NOVIEMBRE ──────────────────────────────────────────────
+11: [
+  {d:4,  tipo:"Actividad",  act:"Día de la Educación Especial",                                     resp:"Coord. PIE",                     h:"—",             niv:"Comunidad educativa", src:"drive"},
+  {d:7,  tipo:"Pastoral",   act:"Inicio Mes de María",                                              resp:"Pastoral y Formación",           h:"—",             niv:"Comunidad educativa", src:"drive"},
+  {d:10, tipo:"Actividad",  act:"Retiro IV° medio (10–11 noviembre)",                               resp:"Pastoral y Formación",           h:"Dos días",      niv:"IV° Medio",           src:"drive"},
+  {d:12, tipo:"Pastoral",   act:"Misa de despedida IV° medios",                                     resp:"Pastoral y Formación",           h:"—",             niv:"IV° Medio",           src:"drive"},
+  {d:13, tipo:"Actividad",  act:"Último timbre de los IV° medios",                                  resp:"Equipo Directivo",               h:"—",             niv:"IV° Medio",           src:"drive"},
+  {d:14, tipo:"Actividad",  act:"Proceso de Elecciones estudiantiles (14–17 noviembre)",            resp:"Orientación / TRICEL",           h:"Varios días",   niv:"Comunidad educativa", src:"drive"},
+  {d:18, tipo:"Actividad",  act:"Semana de la Educación Parvularia (18–21 noviembre)",              resp:"Ed. Parvularia",                 h:"Toda la semana",niv:"Ed. Parvularia",       src:"drive"},
+  {d:20, tipo:"Actividad",  act:"Celebración Día del Apoderado",                                    resp:"Equipo Directivo / CCPP",        h:"—",             niv:"Apoderados",          src:"drive"},
+  {d:21, tipo:"Actividad",  act:"Ceremonia de Licenciatura IV° medios",                             resp:"Equipo Directivo",               h:"—",             niv:"IV° Medio",           src:"drive"},
+  {d:24, tipo:"Actividad",  act:"Ceremonia de Titulación / Cierre de actas IV° medios",             resp:"Equipo Directivo",               h:"—",             niv:"IV° Medio",           src:"drive"},
+  {d:25, tipo:"Actividad",  act:"Día Internacional de la Eliminación de la Violencia contra la Mujer",resp:"Convivencia Educativa / Género",h:"—",            niv:"Comunidad educativa", src:"drive"},
+  {d:26, tipo:"Actividad",  act:"II Feria de Innovación Educativa",                                 resp:"Encargado Innovación / Ed. Parvularia",h:"—",        niv:"Comunidad educativa", src:"drive"},
+  {d:28, tipo:"Actividad",  act:"Ceremonia 'Ya sé leer' / Ejercicios espirituales San Fabián de Alico",resp:"1er ciclo / Pastoral",       h:"—",             niv:"1er ciclo / Comunidad",src:"drive"},
+  {d:28, tipo:"Actividad",  act:"Finalización talleres extraescolares",                             resp:"Coord. Extraescolar",            h:"—",             niv:"Comunidad educativa", src:"drive"},
+],
+
+// ── DICIEMBRE ──────────────────────────────────────────────
+12: [
+  {d:1,  tipo:"Actividad",  act:"Semana de la Inclusión Educativa (1–5 diciembre)",                 resp:"Coord. PIE",                     h:"Toda la semana",niv:"Comunidad educativa", src:"drive"},
+  {d:3,  tipo:"Pastoral",   act:"Liturgia de transición kínder–1° básico",                          resp:"Pastoral y Formación / Ed. Parvularia",h:"—",        niv:"kínder y 1° básico",  src:"drive"},
+  {d:3,  tipo:"Actividad",  act:"Gala Villancicos Educación Parvularia y 1er ciclo",                resp:"Ed. Parvularia y 1er ciclo",     h:"—",             niv:"pk–4° básico",        src:"drive"},
+  {d:5,  tipo:"Pastoral",   act:"Término Mes de María",                                             resp:"Pastoral y Formación",           h:"—",             niv:"Comunidad educativa", src:"drive"},
+  {d:8,  tipo:"Feriado",    act:"Feriado — Inmaculada Concepción de la Santísima Virgen María",    resp:"—",                             h:"Todo el día",   niv:"Comunidad educativa", src:"nacional"},
+  {d:10, tipo:"Pastoral",   act:"Liturgia de transición 8°–1° medio",                               resp:"Pastoral y Formación",           h:"—",             niv:"8° y 1° medio",       src:"drive"},
+  {d:11, tipo:"Actividad",  act:"Matrícula 2027",                                                   resp:"Secretaría / Admisión",          h:"—",             niv:"Familias",            src:"drive"},
+  {d:12, tipo:"Actividad",  act:"Actividad familiar 'Mary Ward' — Estadio",                         resp:"Equipo Directivo / Pastoral",    h:"—",             niv:"Familias",            src:"drive"},
+  {d:15, tipo:"Actividad",  act:"Último día de clases / Acto de Premiación Anual",                  resp:"Equipo Directivo",               h:"—",             niv:"Comunidad educativa", src:"drive"},
+  {d:16, tipo:"Reunion",    act:"Jornada de Consejo de Evaluación 2026",                            resp:"Equipo Directivo",               h:"—",             niv:"Docentes",            src:"drive"},
+  {d:17, tipo:"Pastoral",   act:"Encuentro con Cristo para colaboradores (17–19 diciembre)",        resp:"Pastoral y Formación",           h:"Tres días",     niv:"Colaboradores",       src:"drive"},
+  {d:23, tipo:"Pastoral",   act:"Celebración navideña colaboradores",                               resp:"Equipo Directivo / Pastoral",    h:"—",             niv:"Colaboradores",       src:"drive"},
+  {d:30, tipo:"Reunion",    act:"Consejo General — Finalización año",                               resp:"Equipo Directivo",               h:"—",             niv:"Docentes / Directivos",src:"drive"},
+],
+};
+
+// ===== CONSTANTES =====
+const MONTH_NAMES = ['','Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+const MONTH_SHORT = ['','Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+const DOW = ['Lun','Mar','Mié','Jue','Vie','Sáb','Dom'];
+const TODAY_M = 5;
+const TODAY_D = 9;
+const VY = 2026;
+const MONTHS_LIST = Object.keys(MDATA).map(Number).sort((a,b)=>a-b);
+
+let vm = TODAY_M; // viewed month
+let currentFilter = 'all';
+
+// ===== HELPERS =====
+function daysInMonth(m) { return new Date(VY, m, 0).getDate(); }
+function startDOW(m)    { return (new Date(VY, m-1, 1).getDay() + 6) % 7; } // Mon=0
+function dow(m, d)      { return (startDOW(m) + d - 1) % 7; }
+
+function buildEmap(evs) {
+  const em = {};
+  evs.forEach(e => { if(!em[e.d]) em[e.d]=[]; em[e.d].push(e); });
+  return em;
+}
+function buildCdays(em) {
+  const cd = new Set();
+  for(const [d,evs] of Object.entries(em)) if(evs.length>=4) cd.add(+d);
+  return cd;
+}
+
+// ===== NAVIGATION =====
+function changeMonth(delta) {
+  const idx = MONTHS_LIST.indexOf(vm) + delta;
+  if(idx>=0 && idx<MONTHS_LIST.length) goMonth(MONTHS_LIST[idx]);
+}
+function goMonth(m) {
+  vm = m;
+  currentFilter = 'all';
+  renderMonth();
+}
+
+// ===== MAIN RENDER =====
+function renderMonth() {
+  const evs   = MDATA[vm] || [];
+  const emap  = buildEmap(evs);
+  const cdays = buildCdays(emap);
+  const mname = MONTH_NAMES[vm];
+  const days  = daysInMonth(vm);
+  const sdow  = startDOW(vm);
+
+  // --- NAV PILLS ---
+  document.getElementById('mnTitle').textContent = `${mname} ${VY}`;
+  document.querySelectorAll('.mpill').forEach(b => {
+    const m = +b.dataset.m;
+    b.classList.toggle('active', m===vm);
+    b.classList.toggle('mes-actual', m===TODAY_M);
+  });
+  document.getElementById('btnPrev').disabled = MONTHS_LIST.indexOf(vm)===0;
+  document.getElementById('btnNext').disabled = MONTHS_LIST.indexOf(vm)===MONTHS_LIST.length-1;
+
+  // --- STATS ---
+  const feriados  = evs.filter(e=>e.tipo==='Feriado');
+  const ferDesc   = feriados.length ? feriados.map(e=>`${e.d}°`).join(', ') : 'Sin feriados';
+  const weeks     = Math.ceil((sdow + days) / 7);
+  let statsHTML = `
+    <div class="stat-card">
+      <div class="num">${evs.length}</div>
+      <div class="lbl">Eventos totales</div>
+      <div class="desc">Todas las fuentes</div>
+    </div>
+    <div class="stat-card r">
+      <div class="num">${cdays.size}</div>
+      <div class="lbl">Días con conflicto</div>
+      <div class="desc">4 o más eventos</div>
+    </div>
+    <div class="stat-card o">
+      <div class="num">${feriados.length}</div>
+      <div class="lbl">Feriados</div>
+      <div class="desc">${ferDesc}</div>
+    </div>
+    <div class="stat-card g">
+      <div class="num">${weeks}</div>
+      <div class="lbl">Semanas del mes</div>
+      <div class="desc">${mname} ${VY}</div>
+    </div>`;
+  if(vm===5) {
+    statsHTML += `
+    <div class="stat-card p">
+      <div class="num">7</div>
+      <div class="lbl">Hitos MIPP</div>
+      <div class="desc">Un Mundo Feliz 3°HC</div>
+    </div>
+    <div class="stat-card">
+      <div class="num">4</div>
+      <div class="lbl">Ensayos SIMCE</div>
+      <div class="desc">II° Medio · 6° Básico</div>
+    </div>`;
+  }
+  document.getElementById('statsGrid').innerHTML = statsHTML;
+
+  // --- ALERTAS (solo días futuros o hoy) ---
+  const alertEl = document.getElementById('alertaBanner');
+  // Un día "ya pasó" si el mes es anterior al actual, o si es el mismo mes y el día < hoy
+  const futureDays = [...cdays].sort((a,b)=>a-b).filter(d => {
+    if(vm > TODAY_M) return true;          // mes futuro: todo cuenta
+    if(vm < TODAY_M) return false;         // mes pasado: nada
+    return d >= TODAY_D;                   // mes actual: solo desde hoy
+  });
+  if(futureDays.length > 0) {
+    let ul = '';
+    futureDays.forEach(d => {
+      const devs = emap[d];
+      ul += `<li><strong>${String(d).padStart(2,'0')}/${String(vm).padStart(2,'0')}/${VY} (${DOW[dow(vm,d)]}):</strong> ${devs.length} eventos — ${devs.map(e=>e.act.replace('★ ','')).join(' · ').substring(0,170)}...</li>`;
+    });
+    alertEl.innerHTML = `<div class="banner rojo"><h3>⚠️ ALERTAS DE CONFLICTO — Días con 4 o más eventos</h3><ul>${ul}</ul></div>`;
+  } else {
+    const msg = vm < TODAY_M
+      ? `${mname} ${VY} ya pasó.`
+      : `${mname} ${VY} no tiene días con 4 o más eventos pendientes.`;
+    alertEl.innerHTML = `<div class="banner verde"><h3>✅ Sin conflictos pendientes</h3><ul><li>${msg}</li></ul></div>`;
+  }
+
+  // --- PRÓXIMOS 7 DÍAS (solo mes actual) ---
+  const proxWrap = document.getElementById('proximosWrap');
+  if(vm === TODAY_M) {
+    let rows = '';
+    for(let d=TODAY_D; d<=Math.min(TODAY_D+7, days); d++) {
+      const devs = emap[d]||[];
+      const isC  = cdays.has(d);
+      const iF   = devs.some(e=>e.tipo==='Feriado');
+      const color = isC?'var(--rojo)':iF?'#9ca3af':'var(--azul)';
+      const fechaBox = `<div style="background:${color};color:#fff;border-radius:8px;padding:5px 9px;text-align:center;min-width:50px;flex-shrink:0;font-size:.72rem;font-weight:600"><div style="font-size:1.2rem;font-weight:800;line-height:1">${d}</div>${DOW[dow(vm,d)]}</div>`;
+      const content = devs.length===0
+        ? '<div style="color:#9ca3af;font-size:.82rem">Sin eventos programados</div>'
+        : devs.map(e=>`<div style="font-size:.82rem;font-weight:600">${e.act}</div><div style="font-size:.75rem;color:#6b7280">${e.tipo} · ${e.resp} · ${e.h}</div>`).join('<div style="height:4px"></div>');
+      rows += `<div style="display:flex;align-items:flex-start;gap:12px;padding:9px 0;border-bottom:1px solid #f1f5f9">${fechaBox}<div>${content}</div></div>`;
+    }
+    proxWrap.innerHTML = `<div class="section-title">🔔 Próximos 7 días (desde hoy, ${TODAY_D} mayo)</div><div class="sg-card" style="padding:14px 20px">${rows}</div>`;
+  } else {
+    proxWrap.innerHTML = '';
+  }
+
+  // --- CALENDARIO ---
+  document.getElementById('calHdr').textContent   = `📅 ${mname} ${VY} — Colegio Bicentenario Mary Ward`;
+  document.getElementById('calTitle').textContent = `📆 Calendario ${mname} ${VY}`;
+  const grid = document.getElementById('calGrid');
+  while(grid.children.length > 7) grid.removeChild(grid.lastChild);
+  for(let i=0; i<sdow; i++) {
+    const c=document.createElement('div'); c.className='cal-cell empty'; grid.appendChild(c);
+  }
+  for(let d=1; d<=days; d++) {
+    const devs = emap[d]||[];
+    const iF   = devs.some(e=>e.tipo==='Feriado');
+    const isC  = cdays.has(d);
+    const isT  = (vm===TODAY_M && d===TODAY_D);
+    const c=document.createElement('div');
+    c.className = 'cal-cell'+(isT?' hoy':iF?' feriado':isC?' conflict3':'');
+    const num=document.createElement('div'); num.className='cal-num'; num.textContent=d; c.appendChild(num);
+    if(isC){ const b=document.createElement('div'); b.className='cbadge'; b.textContent=devs.length; c.appendChild(b); }
+    devs.slice(0,2).forEach(ev=>{
+      const s=document.createElement('span');
+      s.className=`chip chip-${ev.tipo}`;
+      s.textContent=ev.act.replace(/★ MIPP Un Mundo Feliz — /,'').replace(/★ /,'').replace(/MIPP Un Mundo Feliz — /,'').substring(0,32);
+      s.title=ev.act;
+      c.appendChild(s);
+    });
+    if(devs.length>2){ const m=document.createElement('span'); m.className='more'; m.textContent=`+${devs.length-2} más`; c.appendChild(m); }
+    grid.appendChild(c);
+  }
+  const rem=7-((sdow+days)%7); if(rem<7) for(let i=0;i<rem;i++){ const c=document.createElement('div'); c.className='cal-cell empty'; grid.appendChild(c); }
+
+  // --- TABLA ---
+  filterTable(currentFilter, null);
+
+  // --- SUGERENCIAS (solo mayo) ---
+  const sgWrap = document.getElementById('sugerenciasWrap');
+  if(vm===5) {
+    sgWrap.innerHTML = `
+    <div class="section-title">💡 Análisis estratégico y sugerencias — Mayo 2026</div>
+    <div class="sg-card">
+      <div class="sg-item"><div class="sg-icon">🔥</div><div>
+        <h4>Semana 3 (18–21 mayo): Alta densidad pastoral + evaluativa</h4>
+        <p>Conversatorio ex estudiantes (18–19), visita del Obispo (19), Pentecostés (20) y Feriado Glorias Navales (21) se superponen con la semana de revisión del ensayo MIPP. Coordinar para no programar evaluaciones sumativas en paralelo con las jornadas pastorales.</p>
+      </div></div>
+      <div class="sg-item"><div class="sg-icon">⚠️</div><div>
+        <h4>Semana 4 (25–29 mayo): Período crítico — máxima carga del mes</h4>
+        <p>Simulacro SISMO (26), Congreso Geografía (27–28), entrega ensayo Un Mundo Feliz (29) y Ensayos SIMCE (última semana) se acumulan. Recomendación: adelantar la Reunión de Departamento del 28 al 25 de mayo para liberar la semana.</p>
+      </div></div>
+      <div class="sg-item"><div class="sg-icon">📧</div><div>
+        <h4>Acción pendiente: Propuesta ABP 5°B (Luis Carrasco)</h4>
+        <p>Correo recibido el 06/05 solicitando revisión de propuesta de proyecto y definición de hoja de ruta. No aparece en ningún cronograma. Requiere agenda de reunión o respuesta. Pendiente en tu bandeja.</p>
+      </div></div>
+      <div class="sg-item"><div class="sg-icon">📅</div><div>
+        <h4>Próximo hito mayor: Jornada Planificación 18–19 junio</h4>
+        <p>Dos días completos de trabajo docente, con presentación del área de innovación. Preparar avances del MIPP y del ABP 5°B para ese espacio.</p>
+      </div></div>
+      <div class="sg-item"><div class="sg-icon">🔄</div><div>
+        <h4>Dashboard actualizado automáticamente cada lunes 7:00 AM</h4>
+        <p>Fuentes escaneadas: Gmail institucional (cbmw.cl / liceomariaward.com), Google Drive y Archivos locales. Cualquier correo o documento nuevo es procesado e integrado automáticamente.</p>
+      </div></div>
+    </div>`;
+  } else {
+    sgWrap.innerHTML = '';
+  }
+}
+
+// ===== TABLA =====
+function filterTable(f, btn) {
+  currentFilter = f;
+  document.querySelectorAll('.fbtn').forEach(b => {
+    b.classList.toggle('active', b.dataset.f === f);
+  });
+
+  const evs   = MDATA[vm] || [];
+  const emap  = buildEmap(evs);
+  const cdays = buildCdays(emap);
+  const body  = document.getElementById('eventsBody');
+  body.innerHTML = '';
+
+  let list = [...evs].sort((a,b)=>a.d-b.d);
+  if(f==='conflicto') list = list.filter(e=>cdays.has(e.d));
+  else if(f!=='all')  list = list.filter(e=>e.tipo===f);
+
+  list.forEach(ev => {
+    const isC = cdays.has(ev.d);
+    const tr  = document.createElement('tr');
+    tr.className = isC?'cr':ev.tipo==='Feriado'?'fr':'';
+    const srcBadge = ev.src==='drive' ? '<span class="badge-fuente fuente-drive">Drive</span>'
+                   : ev.src==='gmail' ? '<span class="badge-fuente fuente-gmail">Gmail</span>'
+                   : '<span class="badge-fuente fuente-docx">Local</span>';
+    tr.innerHTML = `
+      <td style="white-space:nowrap;font-weight:600">${isC?'<span class="ci">⚠ </span>':''}${String(ev.d).padStart(2,'0')}/${String(vm).padStart(2,'0')}/${VY}<br><span style="font-weight:400;color:#9ca3af;font-size:.73rem">${DOW[dow(vm,ev.d)]}</span></td>
+      <td style="line-height:1.5">${ev.act}</td>
+      <td><span class="bt bt-${ev.tipo}">${ev.tipo}</span></td>
+      <td style="font-size:.78rem">${ev.resp}</td>
+      <td style="font-size:.76rem;white-space:nowrap">${ev.h}</td>
+      <td style="font-size:.76rem">${ev.niv}</td>
+      <td>${srcBadge}</td>`;
+    body.appendChild(tr);
+  });
+
+  if(!list.length) {
+    body.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:18px;color:#9ca3af">Sin eventos para este filtro en el mes seleccionado</td></tr>';
+  }
+}
+
+// ===== EXPORT JSON =====
+function exportJSON() {
+  const evs   = MDATA[vm] || [];
+  const emap  = buildEmap(evs);
+  const cdays = buildCdays(emap);
+  const mname = MONTH_NAMES[vm];
+  const data  = {
+    generado: "2026-05-09",
+    institucion: "Colegio Bicentenario Mary Ward",
+    responsable: "Roberto Gálvez",
+    mes: `${mname} ${VY}`,
+    fuentes: ["Google Drive", "Gmail", "Archivos locales"],
+    total_eventos: evs.length,
+    dias_conflicto: [...cdays].sort((a,b)=>a-b).map(d=>`${VY}-${String(vm).padStart(2,'0')}-${String(d).padStart(2,'0')}`),
+    eventos: evs.map(e=>({...e, fecha:`${VY}-${String(vm).padStart(2,'0')}-${String(e.d).padStart(2,'0')}`}))
+  };
+  const blob = new Blob([JSON.stringify(data,null,2)], {type:'application/json'});
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href     = url;
+  a.download = `Cronograma-MaryWard-${VY}-${String(vm).padStart(2,'0')}-${MONTH_SHORT[vm]}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+// ===== INICIO =====
+renderMonth();
+</script>
+</body>
+</html>
